@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Search, Plus, Heart, Trash2, Edit2, X, Play, ExternalLink, Video } from 'lucide-react';
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from 'firebase/firestore';
-import { getAuth, signInWithRedirect, GoogleAuthProvider, signOut, onAuthStateChanged } from 'firebase/auth';
+import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from 'firebase/auth';
 
 // Firebase設定
 const firebaseConfig = {
@@ -781,3 +781,4 @@ function App() {
 }
 
 export default App;
+                  
