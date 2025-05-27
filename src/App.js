@@ -383,7 +383,7 @@ function App() {
     if (auth) {
       try {
         const provider = new GoogleAuthProvider();
-        await signInWithRedirect(auth, provider);
+        await signInWithPopup(auth, provider);
       } catch (error) {
         console.error('ログインエラー:', error);
         alert('ログインに失敗しました');
@@ -781,4 +781,3 @@ function App() {
 }
 
 export default App;
-                  
