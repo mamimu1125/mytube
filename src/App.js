@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Search, Plus, Heart, Trash2, Edit2, X, Play, ExternalLink, Video } from 'lucide-react';
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from 'firebase/firestore';
-import { getAuth, signInWithRedirect, getRedirectResult, GoogleAuthProvider, signOut, onAuthStateChanged } from 'firebase/auth';
+import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from 'firebase/auth';
 
 // Firebase設定
 const firebaseConfig = {
@@ -69,15 +69,6 @@ function App() {
             setIsAdmin(false);
             loadData(firestore); // 未ログインでも閲覧可能
           }
-        });
-
-        // リダイレクト後の処理（PWA対応）
-        getRedirectResult(authentication).then((result) => {
-          if (result) {
-            console.log('リダイレクトログイン成功:', result.user);
-          }
-        }).catch((error) => {
-          console.error('リダイレクトログインエラー:', error);
         });
       } catch (error) {
         console.error('Firebase初期化エラー:', error);
@@ -392,7 +383,7 @@ function App() {
     if (auth) {
       try {
         const provider = new GoogleAuthProvider();
-        await signInWithRedirect(auth, provider);
+        await signInWithPopup(auth, provider);
       } catch (error) {
         console.error('ログインエラー:', error);
         alert('ログインに失敗しました');
