@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Search, Plus, Heart, Trash2, Edit2, X, Play, ExternalLink, Video } from 'lucide-react';
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from 'firebase/firestore';
-import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from 'firebase/auth';
+import { getAuth, signInWithRedirect, GoogleAuthProvider, signOut, onAuthStateChanged } from 'firebase/auth';
 
 // Firebase設定
 const firebaseConfig = {
@@ -383,7 +383,7 @@ function App() {
     if (auth) {
       try {
         const provider = new GoogleAuthProvider();
-        await signInWithPopup(auth, provider);
+        await signInWithRedirect(auth, provider);
       } catch (error) {
         console.error('ログインエラー:', error);
         alert('ログインに失敗しました');
